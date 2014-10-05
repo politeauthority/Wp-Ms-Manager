@@ -4,6 +4,8 @@ class WpMsManager{
 
   public function __construct(){
     add_action( 'wp_footer', array( $this, 'google_analytics' ) );
+    add_action( 'admin_footer', array( $this, 'google_analytics' ) );
+    add_action( 'admin_footer', array( $this, 'disable_content' ) );
   }
 
   public function google_analytics(){
@@ -16,6 +18,18 @@ class WpMsManager{
       ga('create', 'UA-55445011-1', 'auto');
       ga('send', 'pageview');
     </script>
+    <?php
+  }
+
+  public function disable_content(){
+    """
+      Here we'll hide sections of the admin from users.
+    """
+    $user = wp_get_current_user();
+    // echo "<pre>"; print_r( $user ); die();;
+    ?>
+    <style type="text/css">
+    </style>
     <?php
   }
 
